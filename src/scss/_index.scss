@@ -1,0 +1,136 @@
+$primary: #2eb738;
+$white: #fff;
+$grey: (
+    light: #f0f0f0,
+    dark: #d8d8d8,
+);
+
+html {
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+h1,
+h2,
+p {
+    margin: 0;
+}
+
+.mb-1 {
+    margin-bottom: 8px;
+}
+
+.container {
+    margin: 50px auto;
+    width: 1280px;
+}
+
+.multiplicationChart {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 80px 85px;
+    background-color: map-get($grey, light);
+    border: solid 1px map-get($grey, dark);
+
+    &__col {
+        width: 350px;
+        height: 366px;
+
+        &:not(:first-child) {
+            background-color: $white;
+            border-radius: 100px 0 30px;
+            box-shadow: 0 3px 10px map-get($grey, dark);
+        }
+
+        &:nth-child(-n+6) {
+            margin-bottom: 40px;
+        }
+    }
+
+    &__title {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &__header,
+        &__footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .line {
+                width: 278px;
+                border: solid 1px $primary;
+            }
+
+            &::before,
+            &::after {
+                content: "x";
+                font-size: 24px;
+                color: $primary;
+            }
+        }
+
+        &__body {
+            text-align: center;
+            color: $primary;
+
+            h1 {
+                font-size: 56px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+        }
+    }
+
+    &__content {
+        box-sizing: border-box;
+        padding: 64px 40px;
+        font-size: 24px;
+        color: $primary;
+
+        &__left,
+        &__right {
+            width: 118px;
+            letter-spacing: 1px;
+        }
+
+        &__left {
+            float: left;
+            margin-right: 34px;
+
+            .topic {
+                margin-top: -10px;
+                margin-bottom: 14px;
+                line-height: 1;
+                font-size: 128px;
+                font-weight: bold;
+                text-align: center;
+                text-shadow: 4px 3px 0 map-get($grey, light);
+            }
+        }
+
+        &__right {
+            float: right;
+        }
+
+        &::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+}
+
+footer {
+    padding: 8px 85px;
+    text-align: right;
+    background-color: $primary;
+
+    p {
+        font-size: 16px;
+        color: map-get($grey, light);
+    }
+}
