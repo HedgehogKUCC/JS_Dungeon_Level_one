@@ -104,6 +104,7 @@ export function script() {
 
 export function typescript() {
     return tsProject.src()
+        .pipe($.sourcemaps.init())
         .pipe(tsProject())
         .js.pipe($.concat('all.js'))
         .pipe($.if(options.env === 'production', $.uglify({ compress: { drop_console: true } })))
