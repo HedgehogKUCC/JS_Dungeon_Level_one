@@ -1,4 +1,4 @@
-const multiplicationChart = document.getElementById('multiplicationChart');
+const multiplicationChart = document.getElementById('multiplicationChart') as HTMLElement;
 
 const ary = nineMultiplyNine([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 const tempAry = ary.slice();
@@ -41,7 +41,7 @@ for (let i = 2; i <= 9; i += 1) {
 
 multiplicationChart.innerHTML = HTML;
 
-function nineMultiplyNine(arr) {
+function nineMultiplyNine(arr: Array<number>) {
     let str = '';
     arr.forEach((initial) => {
         if (initial === 1) { return; }
