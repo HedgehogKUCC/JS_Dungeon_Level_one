@@ -17,6 +17,7 @@ import minimist from 'minimist';
 
 const $ = gulpLoadPlugins();
 const browser = browserSync.create();
+const tsProject = $.typescript.createProject('tsconfig.json');
 
 const paths = {
     ejs: {
@@ -101,6 +102,16 @@ export function script() {
         .pipe(browser.stream());
 }
 
+export function typescript() {
+    return tsProject.src()
+        .pipe(tsProject())
+        .js.pipe($.concat('all.js'))
+        .pipe($.if(options.env === 'production', $.uglify({ compress: { drop_console: true } })))
+        .pipe($.sourcemaps.write('.'))
+        .pipe(dest(paths.scripts.dest))
+        .pipe(browser.stream());
+}
+
 export function scriptPlugin() {
     return src([
         'node_modules/jquery/dist/jquery.min.js',
@@ -132,8 +143,8 @@ export function openBrowser(cb) {
 
 export { watchFiles as watch };
 
-const dev = series(clean, parallel(ejs, style, script), openBrowser);
+const dev = series(clean, parallel(ejs, style, typescript), openBrowser);
 
 export default dev;
 
-exports.build = series(clean, parallel(ejs, style, script));
+exports.build = series(clean, parallel(ejs, style, typescript));
